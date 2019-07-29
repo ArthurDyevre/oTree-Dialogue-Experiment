@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    {% trans "Instructions of Risk" %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="wrapper">
+
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- payoff information -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <div class="card info">
+            <p>
+                {% blocktrans trimmed with option_to_pay=option_to_pay %}
+                    Your score has been calculated based on your strategy and aversion to risk. The next
+                    game will provide further assessment. Please continue after you have read the rules
+                    of the game.
+                {% endblocktrans %}
+            </p>
+
+        </div>
+
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+    {% trans "Introduction to Loss" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper instructions">
+        <p>
+            {% blocktrans trimmed with n=num_choices %}
+                The decision games consist of four parts. You will start with two challenges alone and then
+                you will be paired with an opponent for a match. You will receive instructions to play on paper.
+                Finally, you will be asked to fill in a report to complete the assessment. You will then be shown
+                your results. Good luck.
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}
