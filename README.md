@@ -1,7 +1,7 @@
 # Euthority: Decisions of Lottery, Risk and Judicial Game
 Application for tutorial experiments with oTree
 
-1. Download Gitbash for giving the command line instructions and follow custom configurations
+1. Download Gitbash for giving the command line instructions and follow custom configurations. After changing projects you can reset to this project or directly go to (2) after git add -A
 ```
 https://gitforwindows.org/
 ```
