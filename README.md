@@ -5,7 +5,7 @@ Application for tutorial experiments with oTree
 ```
 https://gitforwindows.org/
 ```
-After changing projects you can reset to this project or directly go to (2) after git add -A
+1.1 After changing projects you can reset to this project or directly go to (2) after git add -A
 ```
 git init
 git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
