@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Summary of all Results
+{% endblock %}
+
+{% block content %}
+
+    <table class="table">
+        <tr>
+            <th>Judicial dialogue</th>
+            <th>International court</th>
+            <th>Domestic court</th>
+
+        </tr>
+        {% for p,q,r in concat_p%}
+            {% if forloop.counter <= 3 %}
+                <tr>
+                    <td>{{ p }}</td>
+                    <td>{{ q }}</td>
+                    <td>{{ r }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+    </table>
+{% endblock %}
