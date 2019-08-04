@@ -22,5 +22,6 @@ git push origin master
 ```
 If you are not up to date with the branch here then you can either pull the repository from here or:
 ```
+git pull
 git push -f origin master
 ```
