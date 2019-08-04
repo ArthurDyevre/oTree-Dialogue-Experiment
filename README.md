@@ -17,7 +17,7 @@ git clone https://github.com/SJ-SCM/oTree-Decision-Experiments
 git init
 git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
 git add .
-git commit . -m 'change description'
+git commit . -m "change description"
 git push origin master
 ```
 If you are not up to date with the branch here then you can either pull the repository from here or:
