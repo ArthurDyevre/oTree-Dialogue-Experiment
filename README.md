@@ -1,25 +1,26 @@
 # Euthority: Decisions of Lottery, Risk and Judicial Game
 Application for tutorial experiments with oTree
 
-1. Download Gitbash for giving the command line instructions and follow custom configurations. After changing projects you can reset to this project or directly go to (2) after git add -A
+1. Download Gitbash for giving the command line instructions and follow custom configurations. 
 ```
 https://gitforwindows.org/
-```
-```
-git init
-git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
-git remote -v 
-git add -A
-git commit -m 'Added my project'
-git push origin master
+git --config --global user.email "sarah_joseph@live.com"
+git --config --global user.name "Sarah"
 ```
 
-2. Get remote branch to local directory:
+2. Get remote branch to local directory or in downloads to have the correct file path:
 ```
 git clone https://github.com/SJ-SCM/oTree-Decision-Experiments
 ```
-
-3. Upload local branch changes to remote:
+3. Make the changes in downloads and copy matlab folder to local branch last cloned, then commit and push back all to the remote branch:
+```
+git init
+git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
+git add .
+git commit . -m 'change description'
+git push origin master
+```
+If you are not up to date with the branch here then you can either pull the repository from here or:
 ```
 git push -f origin master
 ```
