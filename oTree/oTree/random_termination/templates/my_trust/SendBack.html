@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Test: Your Choice
+    Round {{ subsession.round_number }} of {{ Constants.num_rounds }}
+
+{% endblock %}
+
+{% block content %}
+
+    {% include 'random_termination/Instructions.html' %}
+
+    <p>
+{#        You are Participant B. Participant A sent you {{group.sent_amount}}.#}
+    </p>
+
+    {% formfield group.sent_back_amount label="What is your choice?" %}
+
+    {% next_button %}
+
+{% endblock %}

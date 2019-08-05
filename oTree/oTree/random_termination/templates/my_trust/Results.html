@@ -1,0 +1,70 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Summary and Results
+{% endblock %}
+
+{% block content %}
+
+    {% if player.id_in_group == 1 %}
+        <p>
+            You sent Participant B {{ group.sent_amount }}.
+            Participant B returned {{ group.sent_back_amount }}.
+            Your payoff in round 4 is {{ player.payoff }}
+
+        </p>
+    {% else %}
+        <p>
+            Participant A sent you {{ group.sent_amount }}.
+            You returned {{ group.sent_back_amount }}.
+            Your payoff in round 4 is {{ player.payoff }}
+        </p>
+
+    {% endif %}
+
+    <table class="table">
+        <tr>
+            <th>Participant A Total</th>
+            <th>Participant B Total</th>
+
+        </tr>
+        <tr>
+            <td>{{ player1_total }}</td>
+            <td>{{ player2_total }}</td>
+
+        </tr>
+
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Participant A</th>
+            <th>Participant B</th>
+
+        </tr>
+        <tr>
+            <td>{{ 1 }}</td>
+            <td>{{ player1_round1 }}</td>
+            <td>{{ player2_round1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ 2 }}</td>
+            <td>{{ player1_round2 }}</td>
+            <td>{{ player2_round2 }}</td>
+        </tr>
+        <tr>
+            <td>{{ 3 }}</td>
+            <td>{{ player1_round3 }}</td>
+            <td>{{ player2_round3 }}</td>
+        </tr>
+        <tr>
+            <td>{{ 4 }}</td>
+            <td>{{ player1_round4 }}</td>
+            <td>{{ player2_round4 }}</td>
+        </tr>
+    </table>
+
+
+{% endblock %}

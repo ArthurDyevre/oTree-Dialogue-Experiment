@@ -20,10 +20,7 @@ SESSION_CONFIGS = [
         'app_sequence': ['lottery', 'mpl','eliciting_beliefs_rt'],
         'my_page_timeout_seconds': 60,
     },
-    # Note: Use the Server Check tab in oTree to update system requirements
-    # 1. download postgresql-10.9-2-windows-x64
-    # 2. select the postgresql-10.9-2-windows-x64 package in the download process
-    # other session configs go here ...
+    # Note: change the app sequence to try the other subsessions
 ]
 
 

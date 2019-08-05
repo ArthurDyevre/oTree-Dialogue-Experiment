@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Resource Game:
+    Round {{ subsession.round_number }}
+
+{% endblock %}
+
+{% block content %}
+
+    {% include 'euthority_game_v2/Instructions.html' %}
+
+    <p>
+
+    </p>
+    <p>
+
+    You are Participant B. Participant A sent you {{group.sent_amount}}.
+    </p>
+
+    {% formfield group.sent_back_amount label="What is your response?" %}
+    <p>
+
+    </p>
+    {% next_button %}
+
+{% endblock %}
