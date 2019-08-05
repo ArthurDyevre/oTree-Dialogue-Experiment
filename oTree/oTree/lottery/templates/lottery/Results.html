@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-    {% trans "Instructions of Risk" %}
+    {% trans "Results of Loss" %}
 {% endblock %}
 
 {% block content %}
@@ -22,9 +22,12 @@
         <div class="card info">
             <p>
                 {% blocktrans trimmed with option_to_pay=option_to_pay %}
-                    Your score has been calculated based on your strategy and aversion to risk. The next
-                    game will provide further assessment. Please continue after you have read the rules
-                    of the game.
+                    One of the 6 decisions will be randomly picked for your payoff to determine your earnings for the
+                    option you chose in that decision. You will be informed about the payoff at the end of the
+                    experiment.
+                    <br/>
+                    <br/>
+                    Click on the next button to continue with task 2.
                 {% endblocktrans %}
             </p>
 

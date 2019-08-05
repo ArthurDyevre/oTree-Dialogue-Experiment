@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-    {% trans "Instructions of Judicial Game" %}
+    {% trans "Results of Risk" %}
 {% endblock %}
 
 {% block content %}
@@ -20,9 +20,15 @@
         <div class="card info">
             <p>
                 {% blocktrans trimmed with option_to_pay=option_to_pay %}
-                    Your score has been calculated based on your strategy and aversion to risk. The next
-                    match will assess you against your opponent. Please continue when you have read the rules
-                    of the game.
+                    One of the 11 decisions will be randomly picked for your payoff to determine your earnings for the
+                   option you chose in that decision. You will be informed about the payoff at the end of the
+                   experiment.
+                   <br/>
+                   <br/>
+                    We will hand out the instructions of task 3.
+                   <br/>
+                   <br/>
+                    Click on the next button to continue with task 3.
                 {% endblocktrans %}
             </p>
         </div>
