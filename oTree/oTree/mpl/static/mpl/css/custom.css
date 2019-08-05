@@ -66,7 +66,7 @@ h2 {
 }
 
 .pie-chart {
-    min-width: 20px;
+    min-width: 0px;
     margin: 0 auto;
 }
 
@@ -75,17 +75,17 @@ h2 {
 }
 
 .formfield {
-    min-width: 80px;
+    min-width: 140px;
     text-align: center;
 }
 
 .lottery-a {
-    min-width: 160px;
-    text-align: right;
+    min-width: 190px;
+    text-align: left;
 }
 
 .lottery-b {
-    min-width: 160px;
+    min-width: 0px;
     text-align: left;
 }
 

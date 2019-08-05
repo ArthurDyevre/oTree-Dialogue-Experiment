@@ -16,7 +16,7 @@ matrix_beliefs = [[0 for x1 in range(number_of_rounds)] for y1 in range(number_o
 matrix_toString = [[0 for x2 in range(number_of_rounds)] for y2 in range(number_of_students)]
 matrix_beliefs_toString = [[0 for x3 in range(number_of_rounds)] for y3 in range(number_of_students)]
 matrix_lottery_risks = [[0 for x0 in range(2)] for y0 in range(number_of_students)] # lottery is column 1, risk is column 2
-
+game_finished = False
 count = 0
 matrix_finished = []
 matrix_finished.clear()
@@ -135,7 +135,7 @@ class Results1(Page):
 class Results(Page):
 
     def is_displayed(self):
-        return self.round_number == Constants.rt[self.group.id_in_subsession-1]
+        return self.round_number == Constants.rt[self.group.id_in_subsession-1] and game_finished == False
     def vars_for_template(self):
         i = 2*self.group.id_in_subsession-2
         p1_tot = c(sum(matrix[i]))/Constants.rt[self.group.id_in_subsession-1] + c(sum(matrix_beliefs[i]))
@@ -235,16 +235,17 @@ class Summary(Page):
         classifier = 'none'
         if self.player.id_in_group == 1:
             classifier = 'A'
-            EB_score = "Your score is " + str(p1_tot_EBRT) + " and " + "your opponent scored " + str(p2_tot_EBRT)
+            EB_score = "Your score as the international court is " + str(p1_tot_EBRT) + " and " + "the domestic court scored " + str(p2_tot_EBRT)
             t_score = float(self.participant.vars['lottery_score']) + float(self.participant.vars['risk_score']) + float(p1_tot_EBRT)
 
         if self.player.id_in_group == 2:
             classifier = 'B'
-            EB_score = "Your score is " + str(p2_tot_EBRT) + " and " + "your opponent scored " + str(p1_tot_EBRT)
+            EB_score = "Your score as the domestic court is " + str(p2_tot_EBRT) + " and " + "the international court scored " + str(p1_tot_EBRT)
             t_score = float(self.participant.vars['lottery_score']) + float(self.participant.vars['risk_score']) + float(p2_tot_EBRT)
 
         games = ["Lottery", "Risk", "Elicing Beliefs"]
         scores = [self.participant.vars['lottery_score'], self.participant.vars['risk_score'], EB_score ]
+        game_finished = True
 
 
         return {

@@ -3,7 +3,7 @@
 
 {% block title %}
     Decisions of Judicial Game:
-    </br>
+    <br/>
     Results of the Round
 {% endblock %}
 
@@ -13,16 +13,19 @@
 
     {% if player.id_in_group == 1 %}
         <p>
-            You sent Participant B {{ group.sent_amount }}.
-            Participant B returned {{ group.sent_back_amount }}.
-            Your payoff in the last round was {{ player.payoff }}.
-
+            <br/>
+            You sent domestic court: {{ group.sent_amount }}.<br/>
+            Domestic court returned: {{ group.sent_back_amount }}.<br/>
+            Your payoffs are listed below. <br/>
+            <br/>
         </p>
     {% else %}
         <p>
-            Participant A sent you {{ group.sent_amount }}.
-            You returned {{ group.sent_back_amount }}.
-            Your payoff in the last round was {{ player.payoff }}.
+            <br/>
+            International court sent you: {{ group.sent_amount }}.<br/>
+            You returned: {{ group.sent_back_amount }}.<br/>
+            Your payoffs are listed below. <br/>
+            <br/>
         </p>
 
     {% endif %}
@@ -38,12 +41,12 @@
     <table class="table">
         <tr>
             <th>Round</th>
-            <th>Payoff A</th>
-            <th>Payoff B</th>
-            <th>Strategy A</th>
-            <th>Strategy B</th>
-            <th>Beliefs A is assertive</th>
-            <th>Beliefs B challenges</th>
+            <th>Payoff International court</th>
+            <th>Payoff Domestic court</th>
+            <th>Strategy International court</th>
+            <th>Strategy Domestic court</th>
+            <th>Beliefs International court is assertive</th>
+            <th>Beliefs Domestic court challenges</th>
 
 
         </tr>
