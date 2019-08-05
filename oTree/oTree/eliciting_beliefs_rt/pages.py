@@ -8,7 +8,8 @@ import numpy as np
 import random
 import eliciting_beliefs_rt.database
 
-#Global variables to integrate into oTree
+#Global variables function as the database to integrate into oTree upon deployment, they work for oTree version 2.2.4
+#-----------------------------------------------------------------------------------------------------------------------
 number_of_students = 40
 number_of_rounds = 100
 matrix = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
@@ -16,14 +17,15 @@ matrix_beliefs = [[0 for x1 in range(number_of_rounds)] for y1 in range(number_o
 matrix_toString = [[0 for x2 in range(number_of_rounds)] for y2 in range(number_of_students)]
 matrix_beliefs_toString = [[0 for x3 in range(number_of_rounds)] for y3 in range(number_of_students)]
 matrix_lottery_risks = [[0 for x0 in range(2)] for y0 in range(number_of_students)] # lottery is column 1, risk is column 2
-game_finished = False
+matrix_end = [False for y0 in range(number_of_students)]
 count = 0
 matrix_finished = []
 matrix_finished.clear()
-
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 #Additional functions
+#----------------------------------------------------------------------------------
 def get_payoff_p1(sent_amount, sent_back_amount):
     if sent_amount == 'Exert restrain':
         return 2
@@ -78,7 +80,10 @@ def get_payoff_p2(sent_amount, sent_back_amount):
     if sent_amount == 'Be assertive' and sent_back_amount == 'Challenge':
         return -2
 
+#-----------------------------------------------------------------------------------------
 
+# Class construction of the pages
+#-----------------------------------------------------------------------------------------
 
 class Send(Page):
 
@@ -135,7 +140,8 @@ class Results1(Page):
 class Results(Page):
 
     def is_displayed(self):
-        return self.round_number == Constants.rt[self.group.id_in_subsession-1] and game_finished == False
+        i = 2*self.group.id_in_subsession-2
+        return self.round_number == Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False
     def vars_for_template(self):
         i = 2*self.group.id_in_subsession-2
         p1_tot = c(sum(matrix[i]))/Constants.rt[self.group.id_in_subsession-1] + c(sum(matrix_beliefs[i]))
@@ -245,7 +251,7 @@ class Summary(Page):
 
         games = ["Lottery", "Risk", "Elicing Beliefs"]
         scores = [self.participant.vars['lottery_score'], self.participant.vars['risk_score'], EB_score ]
-        game_finished = True
+        matrix_end[i] = True
 
 
         return {
@@ -268,6 +274,11 @@ class Questionaire(Page):
     def is_displayed(self):
         return self.round_number == Constants.rt[self.group.id_in_subsession-1]
 
+
+#-----------------------------------------------------------------------------------------------------
+
+# Sequence of pages for display
+# ---------------------------------------------------------------------------------------------------
 page_sequence = [
     Eliciting_Beliefs_P2,
     Send,
