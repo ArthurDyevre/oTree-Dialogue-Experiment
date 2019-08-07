@@ -17,7 +17,7 @@ git clone https://github.com/SJ-SCM/oTree-Decision-Experiments
 ```
 git init
 ```
-_   (3.1) This code is only needed during the first setup, otherwise skip to the next lines _
+_(3.1) This code is only needed during the first setup, otherwise skip to the next lines_
 ```
 git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
 ```
