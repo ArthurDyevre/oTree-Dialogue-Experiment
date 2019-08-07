@@ -1,4 +1,6 @@
 # 1. Experimental Protocol Application: Git Setup
+<br/>
+<br/>
 
 1. Download Gitbash for giving the command line instructions and follow custom configurations within the Gitbash app terminal
 ```
@@ -30,11 +32,12 @@ git push origin master
 git pull
 git push -f origin master
 ```
-
-
-
+<br/>
+<br/>
+<br/>
 # 2. Experimental Protocol Application: oTree Setup
-
+<br/>
+<br/>
 ## **A. For testing**
 
 1. Navigate in the windows command prompt to the folder with the settings.py file
@@ -44,7 +47,8 @@ otree devserver
 ```
 3. go to localhost:8000 in the browser
 
-
+<br/>
+<br/>
 
 ## **B. For deploying in a local area network**
 
