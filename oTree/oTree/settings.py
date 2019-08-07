@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'mpl',
-        'display_name': "Decision Games 2019",
+        'display_name': "App of Treatments V03: Lottery > Risk > TP12 EBRT",
         'num_demo_participants': 2,
         'app_sequence': ['lottery', 'mpl','eliciting_beliefs_rt'],
         'my_page_timeout_seconds': 60,

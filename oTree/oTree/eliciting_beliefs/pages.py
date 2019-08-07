@@ -24,18 +24,23 @@ def get_payoff_p1(sent_amount, sent_back_amount):
         return -2
 
 def get_belief_payoff_p1(sent_belief, sent_back_amount):
-    if sent_back_amount == 'Challenge':
+    # Random binomial
+    # numpy.random.binomial(n, p, size=None)
+    # where n is the number of trials, p is the probability of success, and N is the number of successes.
+    # https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.binomial.html
+
+    if sent_back_amount == 'Challenge': # at 100 percent
         prob = sent_belief/100
-        p_tilda = ((2-pow((1-prob),2)))/2
+        p_tilda = ((1-pow((1-prob),2)))
         p = np.random.binomial(1, p_tilda, 1)
         if p == 0:
             return 0.05
         else:
             return 0.15
 
-    if sent_back_amount == 'Do not challenge':
+    if sent_back_amount == 'Do not challenge': # at 0 percent
         prob = sent_belief/100
-        p_tilda = (2-pow(prob,2))/2
+        p_tilda = (1-pow(prob,2))
         p = np.random.binomial(1, p_tilda, 1)
         if p == 0:
             return 0.05
@@ -43,23 +48,26 @@ def get_belief_payoff_p1(sent_belief, sent_back_amount):
             return 0.15
 
 def get_belief_payoff_p2(sent_back_belief, sent_amount):
-    if sent_amount == "Be assertive":
+
+    if sent_amount == "Exert restrain": # at 0 percent
         prob = sent_back_belief/100
-        p_tilda = (2-pow(1-prob,2))/2
+        p_tilda = (1-pow(prob,2))
         p = np.random.binomial(1, p_tilda, 1)
         if p == 0:
             return 0.05
         else:
             return 0.15
 
-    if sent_amount == "Exert restrain":
+    if sent_amount == "Be assertive": # at 100 percent
         prob = sent_back_belief/100
-        p_tilda = (2-pow(prob,2))/2
+        p_tilda = (1-pow(1-prob,2))
         p = np.random.binomial(1, p_tilda, 1)
         if p == 0:
             return 0.05
         else:
             return 0.15
+
+
 
 
 

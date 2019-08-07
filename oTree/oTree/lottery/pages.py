@@ -18,6 +18,13 @@ def vars_for_all_templates(self):
 # ******************************************************************************************************************** #
 # *** CLASS INSTRUCTIONS *** #
 # ******************************************************************************************************************** #
+class General_Instructions(Page):
+
+    # only display instruction in round 1
+    # ----------------------------------------------------------------------------------------------------------------
+    def is_displayed(self):
+        return self.subsession.round_number == 1
+
 class Instructions(Page):
 
     # only display instruction in round 1
@@ -205,5 +212,5 @@ class Results(Page):
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #
 # ******************************************************************************************************************** #
-page_sequence = [Instructions,Decision,Results]
+page_sequence = [General_Instructions,Instructions,Decision,Results]
 

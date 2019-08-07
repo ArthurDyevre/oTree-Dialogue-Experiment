@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+    {% trans "General Instructions" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper instructions">
+            {% blocktrans trimmed with n=6 %}
+                Paragraph 1
+                <br/>
+                <br/>
+
+                Paragraph 2
+                <br/>
+                <br/>
+
+                Paragraph 3
+                <br/>
+                <br/>
+
+
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}
