@@ -12,10 +12,14 @@ git --config --global user.name "Sarah"
 ```
 git clone https://github.com/SJ-SCM/oTree-Decision-Experiments
 ```
-3. Make the changes locally, then commit and push back all to the remote branch:
+3. Make the changes locally, and navigate to otree-decision-experiments. Then commit and push back all to the remote branch:
 ```
 git init
+```
+The code is only needed during the first setup
+```
 git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
+```
 git add .
 git commit . -m "change description"
 git push origin master
