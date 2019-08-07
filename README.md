@@ -1,4 +1,4 @@
-# 1. Euthority: Decisions of Lottery, Risk and Judicial Game on Git
+# 1. Decisions of Lottery, Risk and Judicial Game on Git
 Application for tutorial experiments with oTree
 
 1. Download Gitbash for giving the command line instructions and follow custom configurations within the Gitbash app terminal
@@ -33,7 +33,7 @@ git push -f origin master
 ```
 
 
-# 2. Euthority: Decisions of Lottery, Risk and Judicial Game with oTree
+# 2. Decisions of Lottery, Risk and Judicial Game with oTree
 
 A. For testing: 
 
