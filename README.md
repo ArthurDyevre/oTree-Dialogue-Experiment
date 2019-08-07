@@ -37,6 +37,8 @@ git push -f origin master
 
 # 2. Experimental Protocol Application: oTree Setup
 
+<br/>
+
 ## **A. For testing**
 
 1. Navigate in the windows command prompt to the folder with the settings.py file
