@@ -11,18 +11,20 @@
 
     {% if player.id_in_group == 1 %}
         <p>
-            You sent domestic court {{ group.sent_amount }}.
+            You sent domestic court {{ group.sent_amount }}.<br/>
             Domestic court returned {{ group.sent_back_amount }}.
-
-            Your payoffs are listed below.
+            <br/>
+            <br/>
+            Your payoffs are listed below.<br/>
 
         </p>
     {% else %}
         <p>
-            International court sent you {{ group.sent_amount }}.
+            International court sent you {{ group.sent_amount }}.<br/>
             You returned {{ group.sent_back_amount }}.
-
-            Your payoffs are listed below.
+            <br/>
+            <br/>
+            Your payoffs are listed below.<br/>
         </p>
 
     {% endif %}

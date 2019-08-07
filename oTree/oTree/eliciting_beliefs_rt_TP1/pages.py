@@ -29,10 +29,11 @@ matrix_finished.clear()
 #Additional functions
 #----------------------------------------------------------------------------------
 def get_payoff_p1(sent_amount, sent_back_amount,i,j):
-    if matrix_pi[i][j] == "hawkish":  # type = hawkish
-        return 4
-    if matrix_pi[i][j] == "dovish":  # type = dovish
-        return 6
+    if sent_amount == 'Exert restrain':
+        if matrix_pi[i][j] == "hawkish":  # type = hawkish
+            return 4
+        if matrix_pi[i][j] == "dovish":  # type = dovish
+            return 6
 
     if sent_amount == 'Be assertive' and sent_back_amount == 'Do not challenge':
         return 7
@@ -128,15 +129,10 @@ class Send(Page):
         j = self.round_number - 1
 
         pi = random.randrange(1, 3, 1)
-        tau = random.randrange(1, 3, 1)
         if pi == 1:
             matrix_pi[i][j] = "hawkish"
         if pi == 2:
             matrix_pi[i][j] = "dovish"
-        if tau == 1:
-            matrix_tau[i][j] = "hawkish"
-        if tau == 2:
-            matrix_tau[i][j] = "dovish"
 
         return {
             'nature': matrix_pi[i][j]
@@ -159,12 +155,7 @@ class SendBack(Page):
     def is_displayed(self):
         i = 2 * self.group.id_in_subsession - 2
         return self.player.id_in_group == 2 and self.round_number <= Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False and matrix_end[i+1] == False and self.group.sent_amount != 'Exert restrain'
-    def vars_for_template(self):
-        i = 2 * self.group.id_in_subsession - 2
-        j = self.round_number - 1
-        return {
-            'nature': matrix_tau[i][j]
-        }
+
 class Eliciting_Beliefs_P2(Page):
 
     form_model = 'group'

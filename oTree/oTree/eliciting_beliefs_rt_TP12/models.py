@@ -29,7 +29,7 @@ class Constants(BaseConstants):
     multiplication_factor = 3
 
     p = random.randrange(1, 3, 1)
-    x = np.random.binomial(3, 0.5, 10) + np.random.binomial(3, 0.5, 10) + np.random.binomial(3, 0.5, 10)
+    x = np.random.negative_binomial(3, 0.5, 10) + np.random.negative_binomial(3, 0.5, 10) + np.random.negative_binomial(3, 0.5, 10)
     rt = np.array(x).tolist()
 
     num_rounds = 20
