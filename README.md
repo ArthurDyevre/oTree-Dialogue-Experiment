@@ -34,11 +34,9 @@ git push -f origin master
 ```
 <br/>
 <br/>
-<br/>
 
 # 2. Experimental Protocol Application: oTree Setup
 
-<br/>
 <br/>
 
 ## **A. For testing**
@@ -50,7 +48,6 @@ otree devserver
 ```
 3. go to localhost:8000 in the browser
 
-<br/>
 <br/>
 
 ## **B. For deploying in a local area network**
