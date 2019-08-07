@@ -32,9 +32,10 @@ git push -f origin master
 ```
 
 
+
 # 2. Experimental Protocol Application: oTree Setup
 
-## **A. For testing:**
+## **A. For testing**
 
 1. Navigate in the windows command prompt to the folder with the settings.py file
 2. Deploy locally with:
@@ -43,7 +44,9 @@ otree devserver
 ```
 3. go to localhost:8000 in the browser
 
-## **B. For deploying in a local area network:**
+
+
+## **B. For deploying in a local area network**
 
 - [ ] B.1 Configure firewall
 
