@@ -1,4 +1,4 @@
-# 1. App for Experimental Protocol on Git
+# 1. Experimental Protocol Application: Git Setup
 Application for tutorial experiments with oTree
 
 1. Download Gitbash for giving the command line instructions and follow custom configurations within the Gitbash app terminal
@@ -33,7 +33,7 @@ git push -f origin master
 ```
 
 
-# 2. App for Experimental Protocol with oTree
+# 2. Experimental Protocol Application: oTree Setup
 
 **A. For testing:**
 
