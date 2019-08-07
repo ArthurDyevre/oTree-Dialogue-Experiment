@@ -181,8 +181,6 @@ class Results(Page):
         choices = [list(t) for t in zip(*self.participant.vars['mpl_choices'])]
         indices = choices[0]
 
-
-
         if Constants.one_choice_per_page:
             return {
                 'payoff':         self.player.payoff,
@@ -200,5 +198,5 @@ class Results(Page):
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #
 # ******************************************************************************************************************** #
-page_sequence = [Instructions,Decision, Results,Introduction_EBRT]
+page_sequence = [Instructions,Decision, Results]
 

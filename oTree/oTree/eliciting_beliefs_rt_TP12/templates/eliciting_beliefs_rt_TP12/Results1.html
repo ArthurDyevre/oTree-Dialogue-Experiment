@@ -47,11 +47,13 @@
             <th>Strategy Domestic court</th>
             <th>Beliefs International court is assertive</th>
             <th>Beliefs Domestic court challenges</th>
+            <th>Nature International Court</th>
+            <th>Nature Domestic Court</th>
 
 
         </tr>
 
-        {% for p,q,r,s,t,u in concat_p%}
+        {% for p,q,r,s,t,u,v,w in concat_p%}
             {% if forloop.counter <= round %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
@@ -61,6 +63,9 @@
                     <td>{{ s }}</td>
                     <td>{{ t }}</td>
                     <td>{{ u }}</td>
+                    <td>{{ v }}</td>
+                    <td>{{ w }}</td>
+
                 </tr>
             {% endif %}
         {% endfor %}

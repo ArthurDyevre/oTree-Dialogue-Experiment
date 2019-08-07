@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Decisions of Judicial Game:
+    <br/>
+    Round {{ subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+
+    </p>
+    <p>
+
+    What do you think the international court will choose next?
+
+    Please indicate your beliefs and confidence with the slider. A score of 0 indicates you think
+    the international court will not be assertive and a score of 100 indicates you think the international will be assertive.
+
+    </p>
+    <p>
+    <br/>
+    </p>
+    <div>
+        <div>
+            <p style="position:relative; left:0px;font-size:10px;float:left"><b>Not assertive</b></p>
+		</div>
+        <div>
+            <p style="position:relative; left:80px;font-size:10px;float:left"><b>Neutral</b></p>
+		</div>
+        <div>
+            <p style="position:relative; left:160px;font-size:10px;float:left"><b>Assertive</b></p>
+		</div>
+        <div> <br/> </div>
+
+    </div>
+
+    <p>
+
+    </p>
+
+    <p>
+
+    </p>
+    {% formfield group.sent_back_belief label=""%}
+    <p>
+    <br/>
+    </p>
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

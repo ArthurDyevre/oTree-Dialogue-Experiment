@@ -13,10 +13,13 @@ import eliciting_beliefs_rt.database
 number_of_students = 40
 number_of_rounds = 100
 matrix = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
+matrix_pi = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
+matrix_tau = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
+
 matrix_beliefs = [[0 for x1 in range(number_of_rounds)] for y1 in range(number_of_students)]
 matrix_toString = [[0 for x2 in range(number_of_rounds)] for y2 in range(number_of_students)]
 matrix_beliefs_toString = [[0 for x3 in range(number_of_rounds)] for y3 in range(number_of_students)]
-matrix_lottery_risks = [[0 for x0 in range(2)] for y0 in range(number_of_students)] # lottery is column 1, risk is column 2
+matrix_lottery_risks = [[0 for x0 in range(2)] for y0 in range(number_of_students)] # proxy is column 1, risk is column 2
 matrix_end = [False for y0 in range(number_of_students)]
 count = 0
 matrix_finished = []
@@ -26,13 +29,37 @@ matrix_finished.clear()
 
 #Additional functions
 #----------------------------------------------------------------------------------
-def get_payoff_p1(sent_amount, sent_back_amount):
-    if sent_amount == 'Exert restrain':
-        return 2
-    if sent_amount == 'Be assertive' and sent_back_amount == 'Do not challenge':
+def get_payoff_p1(sent_amount, sent_back_amount,i,j):
+    if matrix_pi[i][j] == "hawkish":  # type = hawkish
         return 4
+    if matrix_pi[i][j] == "dovish":  # type = dovish
+        return 6
+
+    if sent_amount == 'Be assertive' and sent_back_amount == 'Do not challenge':
+        return 7
+
     if sent_amount == 'Be assertive' and sent_back_amount == 'Challenge':
-        return -2
+        if matrix_tau[i][j] == "hawkish": # type = hawkish
+            return -4
+        if matrix_tau[i][j] == "dovish": # type = dovish
+            return -6
+
+def get_payoff_p2(sent_amount, sent_back_amount,i,j):
+
+    if sent_amount == 'Exert restrain':
+        if matrix_pi[i][j] == "hawkish":
+            return 4
+        if matrix_pi[i][j] == "dovish":
+            return 6
+
+    if sent_amount == 'Be assertive' and sent_back_amount == 'Do not challenge':
+        return 1
+
+    if sent_amount == 'Be assertive' and sent_back_amount == 'Challenge':
+        if matrix_tau[i][j] == "hawkish": # type = hawkish
+            return -4
+        if matrix_pi[i][j] == "dovish": # type = dovish
+            return -6
 
 def get_belief_payoff_p1(sent_belief, sent_back_amount):
     # Random binomial
@@ -82,18 +109,12 @@ def get_belief_payoff_p2(sent_back_belief, sent_amount):
             return 0.15
 
 
-def get_payoff_p2(sent_amount, sent_back_amount):
-    if sent_amount == 'Exert restrain':
-        return 2
-    if sent_amount == 'Be assertive' and sent_back_amount == 'Do not challenge':
-        return 0
-    if sent_amount == 'Be assertive' and sent_back_amount == 'Challenge':
-        return -2
 
 #-----------------------------------------------------------------------------------------
 
 # Class construction of the pages
 #-----------------------------------------------------------------------------------------
+
 class Instructions(Page):
 
     # only display instruction in round 1
@@ -102,21 +123,42 @@ class Instructions(Page):
         i = 2 * self.group.id_in_subsession - 2
         return self.subsession.round_number == 1 and matrix_end[i] == False and matrix_end[i+1] == False
 
+
 class Send(Page):
 
     form_model = 'group'
     form_fields = ['sent_amount']
 
     def is_displayed(self):
-        return self.player.id_in_group == 1 and  self.round_number <= Constants.rt[self.group.id_in_subsession-1]
+        i = 2 * self.group.id_in_subsession - 2
+        return self.player.id_in_group == 1 and  self.round_number <= Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False and matrix_end[i+1] == False
 
+    def vars_for_template(self):
+        i = 2 * self.group.id_in_subsession - 2
+        j = self.round_number - 1
+
+        pi = random.randrange(1, 3, 1)
+        tau = random.randrange(1, 3, 1)
+        if pi == 1:
+            matrix_pi[i][j] = "hawkish"
+        if pi == 2:
+            matrix_pi[i][j] = "dovish"
+        if tau == 1:
+            matrix_tau[i][j] = "hawkish"
+        if tau == 2:
+            matrix_tau[i][j] = "dovish"
+
+        return {
+            'nature': matrix_pi[i][j]
+        }
 class Eliciting_Beliefs_P1(Page):
 
     form_model = 'group'
     form_fields = ['sent_belief']
 
     def is_displayed(self):
-        return self.player.id_in_group == 1 and  self.round_number <= Constants.rt[self.group.id_in_subsession-1] and self.group.sent_amount != 'Exert restrain'
+        i = 2 * self.group.id_in_subsession - 2
+        return self.player.id_in_group == 1 and  self.round_number <= Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False and matrix_end[i+1] == False and self.group.sent_amount != 'Exert restrain'
 
 
 class SendBack(Page):
@@ -125,25 +167,33 @@ class SendBack(Page):
     form_fields = ['sent_back_amount']
 
     def is_displayed(self):
-        return self.player.id_in_group == 2 and self.round_number <= Constants.rt[self.group.id_in_subsession-1] and self.group.sent_amount != 'Exert restrain'
-
+        i = 2 * self.group.id_in_subsession - 2
+        return self.player.id_in_group == 2 and self.round_number <= Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False and matrix_end[i+1] == False  and self.group.sent_amount != 'Exert restrain'
+    def vars_for_template(self):
+        i = 2 * self.group.id_in_subsession - 2
+        j = self.round_number - 1
+        return {
+            'nature': matrix_tau[i][j]
+        }
 class Eliciting_Beliefs_P2(Page):
 
     form_model = 'group'
     form_fields = ['sent_back_belief']
 
     def is_displayed(self):
-        return self.player.id_in_group == 2 and self.round_number <= Constants.rt[self.group.id_in_subsession-1]
+        i = 2 * self.group.id_in_subsession - 2
+        return self.player.id_in_group == 2 and self.round_number <= Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False and matrix_end[i+1] == False
 
 class Results1(Page):
     def is_displayed(self):
-        return self.round_number < Constants.rt[self.group.id_in_subsession-1]
+        i = 2 * self.group.id_in_subsession - 2
+        return self.round_number < Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False and matrix_end[i+1] == False
     def vars_for_template(self):
         i = 2 * self.group.id_in_subsession - 2
         return {
             'matrix_p1': np.add(matrix[i],matrix_beliefs[i]),
             'matrix_p2': np.add(matrix[i+1],matrix_beliefs[i+1]),
-            'concat_p': zip(np.add(matrix[i], matrix_beliefs[i]), np.add(matrix[i + 1], matrix_beliefs[i + 1]),matrix_toString[i],matrix_toString[i + 1],matrix_beliefs_toString[i + 1],matrix_beliefs_toString[i]),
+            'concat_p': zip(np.add(matrix[i], matrix_beliefs[i]), np.add(matrix[i + 1], matrix_beliefs[i + 1]),matrix_toString[i],matrix_toString[i + 1],matrix_beliefs_toString[i + 1],matrix_beliefs_toString[i],matrix_pi[i],matrix_tau[i]),
             'matrix_strategy_p1': matrix_toString[i],
             'matrix_strategy_p2': matrix_toString[i + 1],
             'matrix_belief_p1': matrix_beliefs_toString[i],
@@ -158,18 +208,31 @@ class Results(Page):
 
     def is_displayed(self):
         i = 2*self.group.id_in_subsession-2
-        return self.round_number == Constants.rt[self.group.id_in_subsession-1] and matrix_end[i] == False
+        return self.round_number == Constants.rt[self.group.id_in_subsession-1]
     def vars_for_template(self):
         i = 2*self.group.id_in_subsession-2
-        np.where(matrix_beliefs[i] == None, 0, matrix_beliefs[i])
         p1_tot = c(sum(matrix[i]))/Constants.rt[self.group.id_in_subsession-1] + c(sum(matrix_beliefs[i]))
         p2_tot = c(sum(matrix[i+1]))/Constants.rt[self.group.id_in_subsession-1] + c(sum(matrix_beliefs[i+1]))
+        p1_tot_EBRT = c(sum(matrix[i]))/Constants.rt[self.group.id_in_subsession-1] + c(sum(matrix_beliefs[i]))
+        p2_tot_EBRT = c(sum(matrix[i+1]))/Constants.rt[self.group.id_in_subsession-1] + c(sum(matrix_beliefs[i+1]))
+
+        if self.player.id_in_group == 1:
+            self.participant.vars['TP12_score'] = p1_tot_EBRT
+            self.participant.vars['TP12_score_opponent'] = p2_tot_EBRT
+            print('id 1 total TP12: ', self.participant.vars['TP12_score'])
+            matrix_end[i] = True
+        if self.player.id_in_group == 2:
+            self.participant.vars['TP12_score'] = p2_tot_EBRT
+            self.participant.vars['TP12_score_opponent'] = p1_tot_EBRT
+            print('id 2 total TP12: ', self.participant.vars['TP12_score'])
+            matrix_end[i+1] = True
+
         return {
             'player1_total': p1_tot,
             'player2_total': p2_tot,
             'matrix_p1': np.add(matrix[i],matrix_beliefs[i]),
             'matrix_p2': np.add(matrix[i+1],matrix_beliefs[i+1]),
-            'concat_p': zip(np.add(matrix[i], matrix_beliefs[i]), np.add(matrix[i + 1], matrix_beliefs[i + 1]),matrix_toString[i],matrix_toString[i + 1],matrix_beliefs_toString[i + 1],matrix_beliefs_toString[i]),
+            'concat_p': zip(np.add(matrix[i], matrix_beliefs[i]), np.add(matrix[i + 1], matrix_beliefs[i + 1]),matrix_toString[i],matrix_toString[i + 1],matrix_beliefs_toString[i + 1],matrix_beliefs_toString[i],matrix_pi[i],matrix_tau[i]),
             'matrix_strategy_p1': matrix_toString[i],
             'matrix_strategy_p2': matrix_toString[i+1],
             'matrix_belief_p1': matrix_beliefs_toString[i],
@@ -182,13 +245,17 @@ class Results(Page):
 
 
 class WaitForP1(WaitPage):
-    pass
+    def is_displayed(self):
+        i = 2 * self.group.id_in_subsession - 2
+        return self.round_number <= Constants.rt[self.group.id_in_subsession - 1]
 
 
 class ResultsWaitPage(WaitPage):
+    def is_displayed(self):
+        i = 2 * self.group.id_in_subsession - 2
+        return self.round_number <= Constants.rt[self.group.id_in_subsession-1]
 
     def after_all_players_arrive(self):
-
         if self.round_number == 1:
             print("group: ", self.group.id_in_subsession)
             print("number of rounds: ",Constants.rt[self.group.id_in_subsession-1])
@@ -198,11 +265,10 @@ class ResultsWaitPage(WaitPage):
             group = self.group
             p1 = group.get_player_by_id(1)
             p2 = group.get_player_by_id(2)
-            p1.payoff = get_payoff_p1(group.sent_amount, group.sent_back_amount)
-            p2.payoff = get_payoff_p2(group.sent_amount, group.sent_back_amount)
-
             i = (2 * self.group.id_in_subsession) - 2
             j = self.round_number - 1
+            p1.payoff = get_payoff_p1(group.sent_amount, group.sent_back_amount,i,j)
+            p2.payoff = get_payoff_p2(group.sent_amount, group.sent_back_amount,i,j)
 
             matrix[i][j] = p1.payoff
             matrix_beliefs[i][j] = get_belief_payoff_p1(group.sent_belief, group.sent_back_amount)
@@ -224,11 +290,11 @@ class ResultsWaitPage(WaitPage):
             group = self.group
             p1 = group.get_player_by_id(1)
             p2 = group.get_player_by_id(2)
-            p1.payoff = get_payoff_p1(group.sent_amount, group.sent_back_amount)
-            p2.payoff = get_payoff_p2(group.sent_amount, group.sent_back_amount)
-
             i = (2 * self.group.id_in_subsession) - 2
             j = self.round_number-1
+            p1.payoff = get_payoff_p1(group.sent_amount, group.sent_back_amount,i,j)
+            p2.payoff = get_payoff_p2(group.sent_amount, group.sent_back_amount,i,j)
+
 
             matrix[i][j] = p1.payoff
             matrix_beliefs[i][j] = get_belief_payoff_p1(group.sent_belief, group.sent_back_amount)

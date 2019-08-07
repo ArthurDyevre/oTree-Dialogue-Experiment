@@ -14,11 +14,32 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
 
     {
-        'name': 'mpl',
-        'display_name': "App of Treatments V03: Lottery > Risk > TP12 EBRT",
+        'name': 'V3_TP12_EBRT',
+        'display_name': "App of Treatments V03: Lottery > Risk > EBRT",
         'num_demo_participants': 2,
         'app_sequence': ['lottery', 'mpl','eliciting_beliefs_rt'],
-        'my_page_timeout_seconds': 60,
+        'my_page_timeout_seconds': 500,
+    },
+    {
+        'name': 'V4_TP1_EBRT',
+        'display_name': "App of Treatments V04: Lottery > Risk > TP1 EBRT",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP1'],
+        'my_page_timeout_seconds': 500,
+    },
+    {
+        'name': 'V4_TP12_EBRT',
+        'display_name': "App of Treatments V04: Lottery > Risk > TP12 EBRT",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP12'],
+        'my_page_timeout_seconds': 500,
+    },
+    {
+        'name': 'V4_TP12D_EBRT',
+        'display_name': "App of Treatments V04: Lottery > Risk > TP12D EBRT",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP12D'],
+        'my_page_timeout_seconds': 500,
     },
     # Note: change the app sequence to try the other subsessions
 ]

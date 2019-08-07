@@ -7,36 +7,25 @@
     Results of the Round
 {% endblock %}
 
-
 {% block content %}
-
 
     {% if player.id_in_group == 1 %}
         <p>
-            <br/>
-            You sent domestic court: {{ group.sent_amount }}.<br/>
-            Domestic court returned: {{ group.sent_back_amount }}.<br/>
-            Your payoffs are listed below. <br/>
-            <br/>
+            You sent domestic court {{ group.sent_amount }}.
+            Domestic court returned {{ group.sent_back_amount }}.
+
+            Your payoffs are listed below.
+
         </p>
     {% else %}
         <p>
-            <br/>
-            International court sent you: {{ group.sent_amount }}.<br/>
-            You returned: {{ group.sent_back_amount }}.<br/>
-            Your payoffs are listed below. <br/>
-            <br/>
+            International court sent you {{ group.sent_amount }}.
+            You returned {{ group.sent_back_amount }}.
+
+            Your payoffs are listed below.
         </p>
 
     {% endif %}
-
-    <p>
-
-    </p>
-
-    {% next_button %}
-
-
 
     <table class="table">
         <tr>
@@ -47,11 +36,13 @@
             <th>Strategy Domestic court</th>
             <th>Beliefs International court is assertive</th>
             <th>Beliefs Domestic court challenges</th>
+            <th>Nature International Court</th>
+            <th>Nature Domestic Court</th>
 
 
         </tr>
 
-        {% for p,q,r,s,t,u in concat_p%}
+        {% for p,q,r,s,t,u,v,w in concat_p%}
             {% if forloop.counter <= round %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
@@ -61,15 +52,22 @@
                     <td>{{ s }}</td>
                     <td>{{ t }}</td>
                     <td>{{ u }}</td>
+                    <td>{{ v }}</td>
+                    <td>{{ w }}</td>
+
                 </tr>
             {% endif %}
         {% endfor %}
 
     </table>
 
+    {% if count == num_groups %}
+        {% next_button %}
+    {% endif %}
+
     {% for i in i|rjust:50 %}
         <br/>
     {% endfor %}
 
-{% endblock %}
 
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Questionaire
+{% endblock %}
+
+{% block content %}
+    Before the payment, we ask you to participate in a short survey. Your personal data will be treated anonymously.
+
+    {% formfield player.gender label="Gender" %}
+    {% formfield player.age label="Age" %}
+    {% formfield player.studies label="Your study" %}
+    {% formfield player.question_4 label="Would you say that most of the time people try to help others or only follow their own interests? 0=Help others, 6=follow their own interest" %}
+    {% formfield player.question_5 label="Would you say that most of the time you try to help others or only follow your own interests? 0=Help others, 6=follow your own interest" %}
+    {% formfield player.question_6 label="How do you see yourself: Are you generally a person who is fully prepared to take risks or do you try to avoid taking risks? Please tick a box on the scale, where the value 0 means risk averse and the value 10 means fully prepared to take risks"%}
+    <p>
+    <br/>
+    </p>
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}
