@@ -46,7 +46,7 @@ otree devserver
 
 **B. For deploying in a local area network:**
 
-B.1 Configure firewall
+- [ ] B.1 Configure firewall
 
 1. Open the Windows Firewall
 2. Go to “Inbound Rules”
@@ -56,14 +56,14 @@ B.1 Configure firewall
 6. Select “Allow the connection”
 7. Click “next” then choose a name for your rule (e.g. “oTree”).
 
-B.2 Get the machine IP by entering the following in the windows command terminal
+- [ ] B.2 Get the machine IP by entering the following in the windows command terminal
 ```
 ipconfig
 ```
 The IPV4 address is the one you will need, it may will look something like 10.0.1.3, or could also start with 172 or 192.
 
-B.3 Deploy the server from a local network:
+- [ ] B.3 Deploy the server from a local network:
 In the browser you can start the server with your IP address and port 8000, e.g. otree devserver 10.0.1.3:8000
 
-B.4 Allocation of participant:
+- [ ] B.4 Allocation of participant:
 The session wide link allocates participants, they cannot access via the IP and port URL address
