@@ -16,9 +16,10 @@ git clone https://github.com/SJ-SCM/oTree-Decision-Experiments
 ```
 git init
 ```
-The code is only needed during the first setup
+The code is only needed during the first setup otherwise skip to the next lines
 ```
 git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
+```
 ```
 git add .
 git commit . -m "change description"
