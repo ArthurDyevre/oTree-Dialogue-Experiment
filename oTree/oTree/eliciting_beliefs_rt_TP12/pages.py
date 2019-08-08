@@ -59,7 +59,7 @@ def get_payoff_p2(sent_amount, sent_back_amount,i,j):
     if sent_amount == 'Be assertive' and sent_back_amount == 'Challenge':
         if matrix_tau[i][j] == "hawkish": # type = hawkish
             return -4
-        if matrix_pi[i][j] == "dovish": # type = dovish
+        if matrix_tau[i][j] == "dovish": # type = dovish
             return -6
 
 def get_belief_payoff_p1(sent_belief, sent_back_amount):
