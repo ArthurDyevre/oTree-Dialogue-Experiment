@@ -81,6 +81,11 @@ def get_payoff_p2(sent_amount, sent_back_amount,resent_amount, resent_back_amoun
             if matrix_tau[i][j] == "dovish": # type = dovish 2
                 return -6
 
+
+# for the Brier scores use sum of the squares of differences between forecasted and expected amounts
+# then subtract this value from 1 because the better the forecast the smaller the sum
+# then the random binomial is then used to calculate the extra payoffs
+
 def get_belief_payoff_p1(sent_belief, sent_back_amount, resent_belief, resent_back_amount,i,j):
     # Random binomial
     # numpy.random.binomial(n, p, size=None)
@@ -102,7 +107,7 @@ def get_belief_payoff_p1(sent_belief, sent_back_amount, resent_belief, resent_ba
         brier_value[i][j] = brier_value[i][j] + sq_diff
 
     elif sent_back_amount == None:
-        brier_value[i][j] = brier_value[i][j] + 0.25
+        divider[i][j] = 1
 
     if resent_back_amount == 'Disapply': # at 100 percent
         divider[i][j] = 2
@@ -116,9 +121,8 @@ def get_belief_payoff_p1(sent_belief, sent_back_amount, resent_belief, resent_ba
         sq_diff = pow(diff,2)
         brier_value[i][j] = brier_value[i][j] + sq_diff
 
-    elif resent_back_amount == None and sent_back_amount != None and sent_back_amount != 'Do not challenge': #branch of challenge
-        brier_value[i][j] = brier_value[i][j] + 0.25
-        divider[i][j] = 2
+    elif resent_back_amount == None and sent_back_amount != None and sent_back_amount != 'Do not challenge': #branch of challenge and no value for resent_back_amount means that there was challenge
+        divider[i][j] = 1
 
     brier_value[i][j] = brier_value[i][j]/divider[i][j]
     brier_value[i][j] = 1 - brier_value[i][j]
@@ -155,7 +159,7 @@ def get_belief_payoff_p2(sent_back_belief, sent_amount,resent_back_belief, resen
         sq_diff = pow(diff,2)
         brier_value[i][j] = brier_value[i][j]+ sq_diff
 
-    elif resent_amount == 'Reverse': # at 0 percent
+    elif resent_amount == 'Reverse': # at 0 percent, branch of do not maintain so no final dialog response of D or not D
         divider[i][j] = 2
         diff = resent_back_belief/100
         sq_diff = pow(diff, 2)
