@@ -15,6 +15,9 @@ number_of_rounds = 100
 matrix = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
 matrix_pi = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
 matrix_tau = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
+brier_value = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
+divider = [[0 for x0 in range(number_of_rounds)] for y0 in range(number_of_students)]
+
 
 matrix_beliefs = [[0 for x1 in range(number_of_rounds)] for y1 in range(number_of_students)]
 matrix_toString = [[0 for x2 in range(number_of_rounds)] for y2 in range(number_of_students)]
@@ -78,76 +81,98 @@ def get_payoff_p2(sent_amount, sent_back_amount,resent_amount, resent_back_amoun
             if matrix_tau[i][j] == "dovish": # type = dovish 2
                 return -6
 
-def get_belief_payoff_p1(sent_belief, sent_back_amount, resent_belief, resent_back_amount):
+def get_belief_payoff_p1(sent_belief, sent_back_amount, resent_belief, resent_back_amount,i,j):
     # Random binomial
     # numpy.random.binomial(n, p, size=None)
     # where n is the number of trials, p is the probability of success, and N is the number of successes.
     # https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.binomial.html
-
-    brier_p_value = 0
+    brier_value[i][j] = 0
+    divider[i][j] = 1
 
     if sent_back_amount == 'Challenge': # at 100 percent
+        divider[i][j] = 1
         diff = (100-sent_belief)/100
         sq_diff = pow(diff,2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j] + sq_diff
 
-    if sent_back_amount == 'Do not challenge': # at 0 percent
+    elif sent_back_amount == 'Do not challenge': # at 0 percent, end of round
+        divider[i][j] = 1
         diff = sent_belief/100
         sq_diff = pow(diff,2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j] + sq_diff
+
+    elif sent_back_amount == None:
+        brier_value[i][j] = brier_value[i][j] + 0.25
 
     if resent_back_amount == 'Disapply': # at 100 percent
-        diff = (100 - resent_belief) / 100
+        divider[i][j] = 2
+        diff = (100-resent_belief)/100
         sq_diff = pow(diff, 2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j] + sq_diff
 
-    if resent_back_amount == 'Do not disapply': # at 0 percent
-        diff = resent_belief/100
+    elif resent_back_amount == 'Do not disapply': # at 0 percent
+        divider[i][j] = 2
+        diff = resent_belief / 100
         sq_diff = pow(diff,2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j] + sq_diff
 
-    brier_score_p_value = brier_p_value/2
-    p_accent = 1 - brier_score_p_value
-    print(p_accent)
-    brier_score = np.random.binomial(1, p_accent, 1)
-    if brier_score == 0:
+    elif resent_back_amount == None and sent_back_amount != None and sent_back_amount != 'Do not challenge': #branch of challenge
+        brier_value[i][j] = brier_value[i][j] + 0.25
+        divider[i][j] = 2
+
+    brier_value[i][j] = brier_value[i][j]/divider[i][j]
+    brier_value[i][j] = 1 - brier_value[i][j]
+    print("player 1: ",brier_value[i][j])
+    print("player 1 divider:",divider[i][j])
+
+    brier_value[i][j] = np.random.binomial(1, brier_value[i][j], 1)
+    if brier_value[i][j] == 0:
         return 0.05
-    if brier_score == 1:
+    if brier_value[i][j] == 1:
         return 0.15
 
 
-def get_belief_payoff_p2(sent_back_belief, sent_amount,resent_back_belief, resent_amount):
+def get_belief_payoff_p2(sent_back_belief, sent_amount,resent_back_belief, resent_amount,i,j):
 
-    brier_p_value = 0
+    brier_value[i][j] = 0
+    divider[i][j] = 1
 
     if sent_amount == 'Be assertive': # at 100 percent
+        divider[i][j] = 1
         diff = (100-sent_back_belief)/100
         sq_diff = pow(diff,2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j] + sq_diff
 
-    if sent_amount == 'Exert restrain': # at 0 percent
+    elif sent_amount == 'Exert restrain': # at 0 percent
+        divider[i][j] = 1
         diff = sent_back_belief/100
         sq_diff = pow(diff,2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j] + sq_diff
 
     if resent_amount == 'Maintain': # at 100 percent
-        diff = (100-resent_back_belief)/100
+        divider[i][j] = 2
+        prob = (100-resent_back_belief)/100
         sq_diff = pow(diff,2)
-        brier_p_value = brier_p_value + sq_diff
+        brier_value[i][j] = brier_value[i][j]+ sq_diff
 
-    if resent_amount == 'Reverse': # at 0 percent
-        prob = resent_back_belief/100
+    elif resent_amount == 'Reverse': # at 0 percent
+        divider[i][j] = 2
+        diff = resent_back_belief/100
         sq_diff = pow(diff, 2)
-        brier_p_value = (brier_p_value + sq_diff)/2
+        brier_value[i][j] = brier_value[i][j] + sq_diff
 
-    brier_score_p_value = brier_p_value/2
-    p_accent = 1 - brier_score_p_value
-    print(p_accent)
-    print(brier_p_value)
-    brier_score = np.random.binomial(1, p_accent, 1)
-    if brier_score == 0:
+    elif resent_amount == None and sent_amount != None and sent_amount != 'Exert restrain': #branch of do not challenge so no dialog
+        pass
+
+    brier_value[i][j] = brier_value[i][j]/divider[i][j]
+    brier_value[i][j] = 1- brier_value[i][j]
+    print("player 2:",brier_value[i][j])
+    print("player 2 divider:",divider[i][j])
+
+    brier_value[i][j] = np.random.binomial(1, brier_value[i][j], 1)
+    if brier_value[i][j] == 0:
         return 0.05
-    if brier_score == 1:
+    if brier_value[i][j] == 1:
         return 0.15
 
 
@@ -361,7 +386,7 @@ class ResultsWaitPage(WaitPage):
             p2.payoff = get_payoff_p2(group.sent_amount, group.sent_back_amount,group.resent_amount, group.resent_back_amount,i,j)
 
             matrix[i][j] = p1.payoff
-            matrix_beliefs[i][j] = get_belief_payoff_p1(group.sent_belief, group.sent_back_amount,group.resent_belief, group.resent_back_amount)
+            matrix_beliefs[i][j] = get_belief_payoff_p1(group.sent_belief, group.sent_back_amount,group.resent_belief, group.resent_back_amount,i,j)
 
             matrix_toString [i][j] = group.sent_amount
             matrix_toString_d [i][j] = group.resent_amount
@@ -376,7 +401,7 @@ class ResultsWaitPage(WaitPage):
 
 
             matrix[i + 1][j] = p2.payoff
-            matrix_beliefs[i + 1][j] = get_belief_payoff_p2(group.sent_back_belief, group.sent_amount,group.resent_back_belief, group.resent_amount)
+            matrix_beliefs[i + 1][j] = get_belief_payoff_p2(group.sent_back_belief, group.sent_amount,group.resent_back_belief, group.resent_amount,i+1,j)
             matrix_toString[i + 1][j] = group.sent_back_amount
             matrix_toString_d[i + 1][j] = group.resent_back_amount
 
@@ -399,7 +424,7 @@ class ResultsWaitPage(WaitPage):
             p2.payoff = get_payoff_p2(group.sent_amount, group.sent_back_amount,group.resent_amount, group.resent_back_amount,i,j)
 
             matrix[i][j] = p1.payoff
-            matrix_beliefs[i][j] = get_belief_payoff_p1(group.sent_belief, group.sent_back_amount,group.resent_belief, group.resent_back_amount)
+            matrix_beliefs[i][j] = get_belief_payoff_p1(group.sent_belief, group.sent_back_amount,group.resent_belief, group.resent_back_amount,i,j)
             matrix_toString [i][j] = group.sent_amount
             matrix_toString_d [i][j] = group.resent_amount
 
@@ -412,7 +437,7 @@ class ResultsWaitPage(WaitPage):
                 matrix_beliefs_toString_d [i][j] = str(group.resent_belief) + "%"
 
             matrix[i + 1][j] = p2.payoff
-            matrix_beliefs[i + 1][j] = get_belief_payoff_p2(group.sent_back_belief, group.sent_amount,group.resent_back_belief, group.resent_amount)
+            matrix_beliefs[i + 1][j] = get_belief_payoff_p2(group.sent_back_belief, group.sent_amount,group.resent_back_belief, group.resent_amount,i+1,j)
             matrix_toString[i + 1][j] = group.sent_back_amount
             matrix_toString_d[i + 1][j] = group.resent_back_amount
 

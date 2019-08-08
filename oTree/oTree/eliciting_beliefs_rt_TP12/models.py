@@ -32,7 +32,7 @@ class Constants(BaseConstants):
     x = np.random.negative_binomial(3, 0.5, 10) + np.random.negative_binomial(3, 0.5, 10) + np.random.negative_binomial(3, 0.5, 10)
     rt = np.array(x).tolist()
 
-    num_rounds = 20
+    num_rounds = 99
 
 
 class Player(BasePlayer):
