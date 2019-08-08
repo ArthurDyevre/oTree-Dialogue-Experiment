@@ -30,10 +30,11 @@ matrix_finished.clear()
 #Additional functions
 #----------------------------------------------------------------------------------
 def get_payoff_p1(sent_amount, sent_back_amount,i,j):
-    if matrix_pi[i][j] == "hawkish":  # type = hawkish
-        return 4
-    if matrix_pi[i][j] == "dovish":  # type = dovish
-        return 6
+    if sent_amount == 'Exert restrain':
+        if matrix_pi[i][j] == "hawkish":  # type = hawkish
+            return 4
+        if matrix_pi[i][j] == "dovish":  # type = dovish
+            return 6
 
     if sent_amount == 'Be assertive' and sent_back_amount == 'Do not challenge':
         return 7
