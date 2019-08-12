@@ -31,7 +31,7 @@ SESSION_CONFIGS = [
         'name': 'V4_TP1_EBRT', # attempted without errors
         'display_name': "Application Treatments V04: Lottery > Risk > TP1 EBRT",
         'num_demo_participants': 2,
-        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP1_chat'],
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP1'],
         'my_page_timeout_seconds': 1000,
     },
     {
