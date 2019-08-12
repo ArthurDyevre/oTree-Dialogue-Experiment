@@ -37,6 +37,16 @@ class Constants(BaseConstants):
 
 class Player(BasePlayer):
 
+    mid_question_1 = models.StringField(
+        choices=['Right', 'Wrong'],
+        widget=widgets.RadioSelect
+    )
+
+    mid_question_2 = models.StringField(
+        choices=['Right', 'Wrong'],
+        widget=widgets.RadioSelect
+    )
+
     gender = models.StringField(
         choices=['Male', 'Female', 'Other'],
         widget=widgets.RadioSelect

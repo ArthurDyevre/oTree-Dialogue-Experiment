@@ -106,7 +106,7 @@ class Constants(BaseConstants):
     # ---------------------------------------------------------------------------------------------------------------- #
 
     name_in_url = 'mpl'
-    players_per_group = None
+    players_per_group = 2 # Defines how many players there are in the group in this subsession or game
 
     if one_choice_per_page:
         if certain_choice:

@@ -5,6 +5,8 @@ from .models import Constants
 import random
 
 # variables for all templates
+matrix_finished = []
+
 # --------------------------------------------------------------------------------------------------------------------
 def vars_for_all_templates(self):
     return {
@@ -204,13 +206,20 @@ class Results(Page):
             return {
                 'option_to_pay':  self.player.option_to_pay,
                 'payoff':         self.player.payoff,
-                'indices':        indices
+                'indices':        indices,
+                'num_groups': len(self.subsession.get_groups()),
+                'count': len(matrix_finished),
 
             }
 
+class ResultsWaitPage(WaitPage):
+    def after_all_players_arrive(self):
+        matrix_finished.append(1)
 
+class AllGroupsWaitPage(WaitPage):
+    wait_for_all_groups = True
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #
 # ******************************************************************************************************************** #
-page_sequence = [General_Instructions,Instructions,Decision,Results]
+page_sequence = [General_Instructions,Instructions,Decision,Results,AllGroupsWaitPage]
 

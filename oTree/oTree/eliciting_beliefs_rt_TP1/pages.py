@@ -116,6 +116,37 @@ class Instructions(Page):
         return self.subsession.round_number == 1 and matrix_end[i] == False and matrix_end[i+1] == False
 
 
+class Mid_Questionaire(Page):
+    form_model = 'player'
+    form_fields = ['mid_question_1','mid_question_2']
+
+    def vars_for_template(self):
+        return {
+            'count': len(matrix_finished),
+            'num_groups': len(self.subsession.get_groups()),
+        }
+    def is_displayed(self):
+        i = 2 * self.group.id_in_subsession - 2
+        return self.subsession.round_number == 1 and matrix_end[i] == False and matrix_end[i+1] == False
+
+
+class Mid_Questionaire_Answers(Page):
+    form_model = 'player'
+    def vars_for_template(self):
+        return {
+            'count': len(matrix_finished),
+            'num_groups': len(self.subsession.get_groups()),
+        }
+    def is_displayed(self):
+        i = 2 * self.group.id_in_subsession - 2
+        return self.subsession.round_number == 1 and matrix_end[i] == False and matrix_end[i+1] == False
+
+class AllGroupsWaitPage(WaitPage):
+    wait_for_all_groups = True
+    def is_displayed(self):
+        i = 2 * self.group.id_in_subsession - 2
+        return self.subsession.round_number == 1 and matrix_end[i] == False and matrix_end[i + 1] == False
+
 class Send(Page):
 
     form_model = 'group'
@@ -180,7 +211,8 @@ class Results1(Page):
             'matrix_belief_p1': matrix_beliefs_toString[i],
             'matrix_belief_p2': matrix_beliefs_toString[i + 1],
             'round': self.round_number,
-            'rt': Constants.rt[self.group.id_in_subsession-1]
+            'rt': Constants.rt[self.group.id_in_subsession-1],
+            'none': None,
         }
 
 
@@ -221,6 +253,7 @@ class Results(Page):
             'round': self.round_number,
             'count': len(matrix_finished),
             'num_groups': len(self.subsession.get_groups()),
+            'none': None,
         }
 
 
@@ -314,23 +347,23 @@ class Summary(Page):
         classifier = 'none'
         if self.player.id_in_group == 1:
             classifier = 'A'
-            EB_score = "Your score as the international court is " + str(p1_tot_EBRT) + " and " + "the domestic court scored " + str(p2_tot_EBRT)
+            EB_score = "Your score as the international court is " + str(round(p1_tot_EBRT,2)) + " and " + "the domestic court scored " + str(round(p2_tot_EBRT,2))
             t_score = float(self.participant.vars['lottery_score']) + float(self.participant.vars['risk_score']) + float(p1_tot_EBRT)
 
         if self.player.id_in_group == 2:
             classifier = 'B'
-            EB_score = "Your score as the domestic court is " + str(p2_tot_EBRT) + " and " + "the international court scored " + str(p1_tot_EBRT)
+            EB_score = "Your score as the domestic court is " + str(round(p2_tot_EBRT,2)) + " and " + "the international court scored " + str(round(p1_tot_EBRT,2))
             t_score = float(self.participant.vars['lottery_score']) + float(self.participant.vars['risk_score']) + float(p2_tot_EBRT)
 
         games = ["Lottery", "Risk", "Judicial Resources"]
-        scores = [self.participant.vars['lottery_score'], self.participant.vars['risk_score'], EB_score ]
+        scores = [round(self.participant.vars['lottery_score'],2), round(self.participant.vars['risk_score'],2), EB_score ]
         matrix_end[i] = True
 
 
         return {
             'concat_p': zip(games,scores),
             'classifier': classifier,
-            'total': t_score
+            'total': round(t_score,2)
         }
     def is_displayed(self):
         return self.round_number == Constants.rt[self.group.id_in_subsession-1]
@@ -353,6 +386,9 @@ class Questionaire(Page):
 # ---------------------------------------------------------------------------------------------------
 page_sequence = [
     Instructions,
+    Mid_Questionaire,
+    Mid_Questionaire_Answers,
+    AllGroupsWaitPage,
     Send,
     Eliciting_Beliefs_P2,
     Eliciting_Beliefs_P1,

@@ -14,32 +14,60 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
 
     {
-        'name': 'V3_TP12_EBRT', # attempted without errors
+        'name': 'V3_EBRT', # attempted without errors
         'display_name': "Application Treatments V03: Lottery > Risk > EBRT",
         'num_demo_participants': 2,
         'app_sequence': ['lottery', 'mpl','eliciting_beliefs_rt'],
-        'my_page_timeout_seconds': 500,
+        'my_page_timeout_seconds': 1000,
+    },
+    {
+        'name': 'V3_EBRT_C',  # attempted without errors
+        'display_name': "Application Treatments V03: Lottery > Risk > EBRT with chat",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_chat'],
+        'my_page_timeout_seconds': 1000,
     },
     {
         'name': 'V4_TP1_EBRT', # attempted without errors
         'display_name': "Application Treatments V04: Lottery > Risk > TP1 EBRT",
         'num_demo_participants': 2,
-        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP1'],
-        'my_page_timeout_seconds': 500,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP1_chat'],
+        'my_page_timeout_seconds': 1000,
+    },
+    {
+        'name': 'V4_TP1_EBRT_C',  # attempted without errors
+        'display_name': "Application Treatments V04: Lottery > Risk > TP1 EBRT with chat",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP1_chat'],
+        'my_page_timeout_seconds': 1000,
     },
     {
         'name': 'V4_TP12_EBRT',
         'display_name': "Application Treatments V04: Lottery > Risk > TP12 EBRT",
         'num_demo_participants': 2,
         'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP12'],
-        'my_page_timeout_seconds': 500,
+        'my_page_timeout_seconds': 1000,
+    },
+    {
+        'name': 'V4_TP12_EBRT_C',
+        'display_name': "Application Treatments V04: Lottery > Risk > TP12 EBRT with chat",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP12_chat'],
+        'my_page_timeout_seconds': 1000,
     },
     {
         'name': 'V4_TP12D_EBRT',
         'display_name': "Application Treatments V04: Lottery > Risk > TP12D EBRT",
         'num_demo_participants': 2,
         'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP12D'],
-        'my_page_timeout_seconds': 500,
+        'my_page_timeout_seconds': 1000,
+    },
+    {
+        'name': 'V4_TP12D_EBRT_C',
+        'display_name': "Application Treatments V04: Lottery > Risk > TP12D EBRT with chat",
+        'num_demo_participants': 2,
+        'app_sequence': ['lottery', 'mpl', 'eliciting_beliefs_rt_TP12D_chat'],
+        'my_page_timeout_seconds': 1000,
     },
     # Note: change the app sequence to try the other subsessions
 ]

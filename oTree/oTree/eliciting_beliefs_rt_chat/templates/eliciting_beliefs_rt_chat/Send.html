@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Decisions of Judicial Game:
+    <br/>
+    Round {{ subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+    {% chat nickname="I.C." %}
+
+
+    <p>
+
+    </p>
+    <p>
+
+    You are the international court.
+    </p>
+
+    {% formfield group.sent_amount label="What is your choice?" %}
+    <p>
+    <br/>
+    </p>
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}
