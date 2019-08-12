@@ -8,7 +8,7 @@ Authorization: The repository is allowed to be used and changed for research wit
 Usage: The repository can be referenced via "Nicolas Lampach, Sarah Joseph, Applications of Experimental Protocol, (2019), Repository, https://github.com/SJ-SCM/oTree-Decision-Experiments" <br/>
 <br/>
 References: <br/>
-1. Daniel L. Chen et al., (2016), oTree—An open-source platform for laboratory, online, and field experiments. Journal of Behavioral and Experimental Finance.
+1. Daniel L. Chen et al., (2016), oTree—An open-source platform for laboratory, online, and field experiments. Journal of Behavioral and Experimental Finance. <br/>
 2. Felix Holzmeister, (2018), Repository, https://github.com/JBEF/oTree_MPL <br/>
 <br/>
 
