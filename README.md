@@ -1,7 +1,7 @@
 # Experimental Protocol Application
 
 <br/>
-Summary:Open-source application within behavioural decision experiments of K.U.L academic research. <br/>
+Summary: Open-source application within behavioural decision experiments of K.U.L academic research. <br/>
 <br/>
 Authorization: The repository is allowed to be used and changed for research within the Euthority group. <br/>
 <br/>
