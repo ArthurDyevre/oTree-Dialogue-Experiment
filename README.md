@@ -1,13 +1,19 @@
-# 1. Experimental Protocol Application: Git Setup
+# Experimental Protocol Application
+
 <br/>
-Summary: Open-source application within behavioural decision experiments of K.U.L academic research. <br/>
-Authorization: The repository is allowed to be used and changed for research within the Euthority group. <br/>
-Coding team: Sarah Joseph, supervised by Nicolas Lampach <br/>
-Usage: The repository can be referenced via "Nicolas Lampach, Sarah Joseph, Applications of Experimental Protocol, (2019), Repository, https://github.com/SJ-SCM/oTree-Decision-Experiments" <br/>
-References: <br/>
+**Summary**: Open-source application within behavioural decision experiments of K.U.L academic research. <br/>
+<br/>
+**Authorization**: The repository is allowed to be used and changed for research within the Euthority group. <br/>
+<br/>
+**Usage**: The repository can be referenced via "Nicolas Lampach, Sarah Joseph, Applications of Experimental Protocol, (2019), Repository, https://github.com/SJ-SCM/oTree-Decision-Experiments" <br/>
+<br/>
+**References:** <br/>
 1. Daniel L. Chen et al., (2016), oTree—An open-source platform for laboratory, online, and field experiments. Journal of Behavioral and Experimental Finance.Chen, Schonger, Wickens (2016) oTree—An open-source platform for laboratory, online, and field experiments. Journal of Behavioral and Experimental Finance.<br/> 
 2. Felix Holzmeister, (2018), Repository, https://github.com/JBEF/oTree_MPL <br/>
 <br/>
+
+# 1. Installation of Git SCM
+
 1. Download Gitbash for giving the command line instructions and follow custom configurations within the Gitbash app terminal
 ```
 https://gitforwindows.org/
@@ -41,7 +47,7 @@ git push -f origin master
 <br/>
 <br/>
 
-# 2. Experimental Protocol Application: oTree Setup
+# 2. Installation and Deployment of oTree
 
 <br/>
 
