@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    {% trans "Result of Task 1" %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="wrapper">
+
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- payoff information -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <div class="card info">
+            <p>
+                {% blocktrans trimmed with option_to_pay=option_to_pay %}
+                    One of the 6 decisions has been randomly picked to determine your earnings for the
+                    option you chose in that decision. You will be informed about the payoff at the end of the
+                    experiment.
+                    <br/>
+                    <br/>
+                    Click on the next button to continue with task 2.
+                {% endblocktrans %}
+            </p>
+
+        </div>
+
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

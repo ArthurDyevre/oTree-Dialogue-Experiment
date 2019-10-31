@@ -1,0 +1,60 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Task 3
+    <br/>
+    <br/>
+    Round {{ subsession.round_number }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+
+    </p>
+    <p>
+    <br/>
+    You are the international court
+    <br/>
+    <br/>
+    What do you think the domestic court will respond to your choice?
+
+    Please indicate your beliefs and confidence with the slider. A score of 0 indicates you think
+    the domestic court will not challenge and a score of 100 indicates you think the domestic court will challenge your choice.
+
+    </p>
+    <p>
+    <br/>
+    </p>
+
+    <div>
+        <div>
+            <p style="position:relative; left:0px;font-size:10px;float:left"><b>No challenge</b></p>
+		</div>
+        <div>
+            <p style="position:relative; left:80px;font-size:10px;float:left"><b>Neutral</b></p>
+		</div>
+        <div>
+            <p style="position:relative; left:160px;font-size:10px;float:left"><b>Challenge</b></p>
+		</div>
+        <div> <br/> </div>
+
+
+    </div>
+
+    <p>
+
+    </p>
+
+    {% formfield group.sent_belief label=""%}
+    <p>
+    <br/>
+    </p>
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

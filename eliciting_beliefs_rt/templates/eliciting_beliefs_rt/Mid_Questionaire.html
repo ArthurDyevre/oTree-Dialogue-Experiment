@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Questions to verify your understanding
+{% endblock %}
+
+{% block content %}
+    <br/>
+    Please answer the next questions and go to the next page.
+    <br/>
+    <br/>
+    {% formfield player.mid_question_1 label="Your role is not changing during the game." %}
+    {% formfield player.mid_question_2 label="You are matched each round with another player in the room." %}
+    <p>
+    <br/>
+    </p>
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

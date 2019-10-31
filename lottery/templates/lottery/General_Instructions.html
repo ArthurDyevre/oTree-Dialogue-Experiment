@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+    {% trans "General Instructions" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper instructions">
+            {% blocktrans trimmed with n=6 %}
+                Welcome to our laboratory!
+                <br/>
+                <br/>
+                This is an experiment about individual decision making. If you follow the instructions correctly, you may earn a nice payment. At the end of the experiment, your earnings are paid in cash in a strictly private way.
+                All subjects have identical instructions. Please remain silent and do not look at other participants’ screens.
+                If you have any questions, or need assistance of any kind, please raise your hand and we will come to you. If you disrupt the experiment by talking, laughing, etc., you may be asked to leave and may not be paid.
+                We expect and appreciate your cooperation today.
+                <br/>
+                <br/>
+                <strong> General framework: </strong>
+                <br/>
+                <br/>
+                The experiment has three tasks. The instruction for each task will be displayed on your screen. Before each part, we will let you know about the tasks.
+                Your final payment will be the sum of your earnings during the three tasks. We inform you about the payoffs of the three tasks at the end of the experiment.
+                <br/>
+                <br/>
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}
+

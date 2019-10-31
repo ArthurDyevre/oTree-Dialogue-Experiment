@@ -1,0 +1,113 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+
+    {% if player.id_in_group == 1 %}
+        <p>
+            You sent Participant B {{ group.sent_amount }}.
+            Participant B returned {{ group.sent_back_amount }}.
+            Your payoff in the last round was {{ player.payoff }}.
+
+        </p>
+    {% else %}
+        <p>
+            Participant A sent you {{ group.sent_amount }}.
+            You returned {{ group.sent_back_amount }}.
+            Your payoff in the last round was {{ player.payoff }}.
+        </p>
+
+    {% endif %}
+
+    <p>
+
+    </p>
+
+    {% next_button %}
+
+
+    {% if player.id_in_group == 1 %}
+
+        <h4>Participant A: Score History</h4>
+
+        <table class="table">
+            <tr>
+                <th>Round</th>
+                <th>Payoff</th>
+
+            </tr>
+            {% for p in matrix_p1 %}
+                {% if forloop.counter <= round %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <h4>Participant B: Score History</h4>
+        <table class="table">
+            <tr>
+                <th>Round</th>
+                <th>Payoff</th>
+
+            </tr>
+            {% for p in matrix_p2 %}
+                {% if forloop.counter <= round %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+
+
+    {% if player.id_in_group == 2 %}
+
+        <h4>Participant B: Score History</h4>
+        <table class="table">
+            <tr>
+                <th>Round</th>
+                <th>Payoff</th>
+
+            </tr>
+            {% for p in matrix_p2 %}
+                {% if forloop.counter <= round %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <h4>Participant A: Score History</h4>
+
+        <table class="table">
+            <tr>
+                <th>Round</th>
+                <th>Payoff</th>
+
+            </tr>
+            {% for p in matrix_p1 %}
+                {% if forloop.counter <= round %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ p }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+    {% endif %}
+
+{% endblock %}
+

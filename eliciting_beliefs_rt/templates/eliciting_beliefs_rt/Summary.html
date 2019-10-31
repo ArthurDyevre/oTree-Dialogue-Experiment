@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Results of all tasks
+{% endblock %}
+
+{% block content %}
+    </br>
+
+    <table class="table">
+        <tr>
+            <th>Task</th>
+            <th>Earning </th>
+
+        </tr>
+        {% for p,q in concat_p%}
+            {% if forloop.counter <= 3 %}
+                <tr>
+                    <td>{{ p }}</td>
+                    <td>{{ q }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+    </table>
+
+    <br/>
+
+    <table class="table">
+        <tr>
+            <th>Total score: {{ total }} </th>
+        </tr>
+
+       <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

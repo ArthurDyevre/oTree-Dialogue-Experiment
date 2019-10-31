@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Questions to verify your understanding
+{% endblock %}
+
+{% block content %}
+    <br/>
+    Here are the evaluations of your answers.
+    <br/>
+    <br/>
+    <br/>
+    <p>
+    <b>Questions A: Your role is not changing during the game.</b><br/>
+    </p>
+    {% if player.mid_question_1 == "Right" %}
+        Answer A1: Your answer is correct.<br/>
+    {% else %}
+        Answer A2: Your answer is incorrect. Your role won't change during this game.<br/>
+    {% endif %}
+    <br/>
+    <br/>
+    <p>
+    <b>Question B: You are matched each round with another player in the room.</b><br/>
+    </p>
+
+    {% if player.mid_question_2 == "Right" %}
+        Answer B1: Your answer is incorrect. You will remain in the same group during the entire game.<br/>
+    {% else %}
+        Answer B2: Your answer is correct.<br/>
+    {% endif %}
+
+
+
+    <br/>
+    <br/>
+    <br/>
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

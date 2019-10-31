@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+    {% trans "Instructions for Task 1" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper instructions">
+            {% blocktrans trimmed with n=6 %}
+                <strong> Basid Idea </strong>
+                <br>
+                During this task, you will face {{ n }} decisions displayed on your screen. For each decision you have to choose between "Accept" or "Reject" the lottery.
+                <br/>
+                If you choose "Accept", you have a 50% chance of losing (coin turn up heads) a certain amount of money and 50% chance (coin turn up tails) of winning 6 Euro. While the payoff when a coin turns up tails is fixed for all
+                decisions, the payoff when a coin turns up heads for each option will vary. If you opt for "Reject", you will gain 0 Euro.
+                <br/>
+                <br/>
+                After you have made all of your choices, one of the {{ n }} decisions will be randomly chosen for
+                your payment. Your payoff depends on the choice you made for the randomly drawn decision. If you chose "Accept", your payoff will be randomly determined randomly (according to the corresponding probabilities)
+                whether the negative or positive outcome will constitute your payoff. You will be informed about your payoff at the end of the experiment.
+                <br/>
+                <br/>
+                <strong> Summary: </strong>
+                <br/>
+                <br/>
+                - You will face {{ n }} decisions
+                <br/>
+                - For each decision you will have to choose "Accept or "Reject". You may choose the option "Accept" for some decision rows and "Reject" for other rows.
+                <br/>
+                - When you are finished, one of the {{ n }} decisions will be randomly drawn to determine your payoff in task 1.
+                <br/>
+                - If you chose "Accept" for that decision then the computer will randomly determine the negative or positive outcome.
+                <br/>
+                - You will be informed about your payoff at the end of the experiment.
+                <br/>
+                <br/>
+
+
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

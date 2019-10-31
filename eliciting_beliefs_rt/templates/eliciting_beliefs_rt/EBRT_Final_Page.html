@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'mpl/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}
+    {% trans "End of Decision Games" %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper instructions">
+            {% blocktrans trimmed with n=11 %}
+                The game finished. Please proceed to the next page.
+                <br/>
+                <br/>
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+    {% next_button %}
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Decisions of Judicial Game:
+    <br/>
+    Results of the Round
+{% endblock %}
+
+
+{% block content %}
+
+
+    {% if player.id_in_group == 1 %}
+        <p>
+            You sent domestic court: {{ group.sent_amount }}.<br/>
+
+            {% if group.sent_back_amount == none %}
+                Domestic court cannot return an answer.<br/>
+            {% else %}
+                Domestic court returned: {{ group.sent_back_amount }}.<br/>
+            {% endif %}
+
+            {% if group.resent_amount == none %}
+                Dialog: international court cannot return an answer.<br/>
+            {% else %}
+                You sent domestic court: {{ group.resent_amount }}.<br/>
+            {% endif %}
+
+            {% if group.resent_back_amount == none %}
+                Dialog: domestic court cannot return an answer.<br/>
+            {% else %}
+                Domestic court returned: {{ group.resent_back_amount }}.<br/>
+            {% endif %}
+            <br/>
+            Your payoffs are listed below.
+            <br/>
+            <br/>
+        </p>
+    {% else %}
+        <p>
+            International court sent you: {{ group.sent_amount }}.<br/>
+
+            {% if group.sent_back_amount == none %}
+                Domestic court cannot return an answer.<br/>
+            {% else %}
+                You returned: {{ group.sent_back_amount }}.<br/>
+            {% endif %}
+
+            {% if group.resent_amount == none %}
+                Dialog: international court cannot return an answer.<br/>
+            {% else %}
+                International court sent you: {{ group.resent_amount }}.<br/>
+            {% endif %}
+
+            {% if group.resent_back_amount == none %}
+                Dialog: domestic court cannot return an answer.<br/>
+            {% else %}
+                Domestic court returned: {{ group.resent_back_amount }}.<br/>
+            {% endif %}
+            <br/>
+            Your payoffs are listed below. <br/>
+            <br/>
+        </p>
+
+    {% endif %}
+
+    <p>
+
+    </p>
+
+    {% next_button %}
+
+
+
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Payoff International court</th>
+            <th>Payoff Domestic court</th>
+            <th>Strategy International court</th>
+            <th>Strategy Domestic court</th>
+            <th>Dialog Strategy International court</th>
+            <th>Dialog Strategy Domestic court</th>
+            <th>Beliefs International court is assertive</th>
+            <th>Beliefs Domestic court challenges</th>
+            <th>Beliefs International court maintains</th>
+            <th>Beliefs Domestic court disapplies</th>
+            <th>Nature International Court</th>
+            <th>Nature Domestic Court</th>
+
+
+        </tr>
+
+        {% for p,q,r,s,t,u,v,w,x,y,z,a in concat_p%}
+            {% if forloop.counter <= round %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ p }}</td>
+                    <td>{{ q }}</td>
+
+                    {% if r == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ r }}</td>
+                    {% endif %}
+
+                    {% if s == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ s }}</td>
+                    {% endif %}
+
+                    {% if t == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ t }}</td>
+                    {% endif %}
+
+                    {% if u == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ u }}</td>
+                    {% endif %}
+
+                    {% if r == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ v }}</td>
+                    {% endif %}
+
+                    {% if s == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ w }}</td>
+                    {% endif %}
+
+                    {% if t == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ x }}</td>
+                    {% endif %}
+
+                    {% if u == none %}
+                        <td>N/A</td>
+                    {% else %}
+                        <td>{{ y }}</td>
+                    {% endif %}
+
+                    <td>{{ z }}</td>
+                    <td>{{ a }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+    </table>
+
+    {% for i in i|rjust:50 %}
+        <br/>
+    {% endfor %}
+
+{% endblock %}
+
