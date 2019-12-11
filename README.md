@@ -23,7 +23,7 @@ git config --global user.name "firstname"
 
 2. Get remote branch to local directory:
 ```
-git clone https://github.com/SJ-SCM/oTree-Decision-Experiments
+git clone https://github.com/timothy2799/oTree-Decision-Experiments
 ```
 3. Make the changes locally, and navigate to otree-decision-experiments in GitBash and give command
 ```
@@ -31,7 +31,7 @@ git init
 ```
 _(3.1) This command is only needed during the first setup, otherwise skip._
 ```
-git remote add origin https://github.com/SJ-SCM/oTree-Decision-Experiments
+git remote add origin https://github.com/timothy2799/oTree-Decision-Experiments
 ```
 4. Finally commit and push back all changes to the remote branch:
 ```
