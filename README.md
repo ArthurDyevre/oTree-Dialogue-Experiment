@@ -5,7 +5,7 @@ Summary: Open-source application within behavioural decision experiments of K.U.
 <br/>
 Authorization: The repository is allowed to be used and changed for research within the Euthority group. <br/>
 <br/>
-Usage: The repository can be referenced via "Nicolas Lampach, Sarah Joseph and Timothy Yu-Cheong Yeung. Applications of Experimental Protocol, (2019), Repository, https://github.com/timothy2799/oTree-Decision-Experiments" <br/>
+Usage: The repository can be referenced via "Arthur Dyevre, Nicolas Lampach, Sarah Joseph and Timothy Yu-Cheong Yeung. Applications of Experimental Protocol, (2019), Repository, https://github.com/timothy2799/oTree-Decision-Experiments" <br/>
 <br/>
 References: <br/>
 1. Daniel L. Chen et al., (2016), oTree—An open-source platform for laboratory, online, and field experiments. Journal of Behavioral and Experimental Finance. <br/>
